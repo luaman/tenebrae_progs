@@ -919,7 +919,7 @@ void() misc_gibs =
         precache_model ("progs/gib2.mdl");
         precache_model ("progs/h_zombie.mdl");
         precache_model ("progs/gib1.mdl");
-        precache_sound ("zombie/z_miss.wav");
+        precache_sound ("wizard/hit.wav");
         self.classname = "gibball";
         self.nextthink = time + (random() * 5);
         self.think = gib_fly;
@@ -949,7 +949,7 @@ local entity    gibball;
 
 void() gib_touch = 
 {
-        sound (self, CHAN_VOICE, "zombie/z_miss.wav", 0.25, ATTN_NORM); 
+        sound (self, CHAN_VOICE, "wizard/hit.wav", 0.25, ATTN_NORM); 
         if (self.velocity == '0 0 0')
                 self.avelocity = '0 0 0';
         return;
