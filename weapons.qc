@@ -373,6 +373,8 @@ void() T_MissileTouch =
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
 
+           SUB_BasicEmitter(self,10,"pt_explodecloud");
+
 	BecomeExplosion ();
 };
 
