@@ -65,6 +65,7 @@ void() light =
 			lightstyle(self.style, "m");
 		}
 		client = spawn();
+                setmodel (client, "progs/w_light.spr");
 		client.targetname = self.targetname;
 		client.use = light_use;
 		client.spawnflags = self.spawnflags;
