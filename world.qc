@@ -390,12 +390,25 @@ void(entity ent) CopyToBodyQue =
 	bodyque_head = bodyque_head.owner;
 };
 
+void() info_origin = //Added because some compilers don't support origins - Eradicator
+{
+	if (!self.targetname)
+		objerror("info_origin with no targetname!\n");
+}
+
 //Changed from func_rotate to func_rotating for compatability 
 void() func_rotating = //Rotating Brush - Eradicator 
 { 
+	local entity t;
 	self.solid = SOLID_BSP; 
-	self.movetype = MOVETYPE_PUSH; 
-	setorigin (self, self.origin); 
+	self.movetype = MOVETYPE_PUSH;
+	if (!self.target)
+		setorigin (self, self.origin);
+	else 
+	{
+		t = find (world, targetname, self.target);
+		self.origin=t.origin;
+	}
 	setmodel (self, self.model); 
 	self.classname = "func_rotating"; 
 	setsize (self, self.mins, self.maxs); 
