@@ -697,6 +697,8 @@ string(string s) precache_file2		= #77;		// registered version only
 void(entity e) setspawnparms		= #78;		// set parm1... to the
 												// values at level start
 												// for coop respawn
+void(vector o, float pcount,string effectname) BasicEmitter = #79;
+void(vector o, vector v, float pcount,float tick,float life,string effectname) ExtendedEmitter = #80;												
 
 //============================================================================
 
