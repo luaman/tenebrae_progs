@@ -1082,13 +1082,16 @@ void() W_ChangeWeapon =
 	else if (self.impulse == 6)
 	{
 		fl = IT_GRENADE_LAUNCHER;
-		if (self.use_flare) {
+		if (self.use_flare) 
 			self.use_flare = 0;
 			if (self.ammo_rockets < 1)
 				am = 1;
-		} else {
-			self.use_flare = 1;
 		}
+	else if (self.impulse == 101)
+	{	// Flare grenade uses impulse 101 instead of
+		// being a second mode to standard grenade - Tig
+		fl = IT_GRENADE_LAUNCHER;
+		self.use_flare = 1;
 	}
 	else if (self.impulse == 7)
 	{
@@ -1331,7 +1334,8 @@ ImpulseCommands
 */
 void() ImpulseCommands =
 {
-	if (self.impulse >= 1 && self.impulse <= 8)
+	// move the flare grenade to impulse 101 - Tig
+	if ((self.impulse >= 1 && self.impulse <= 8) || (self.impulse == 101))
 		W_ChangeWeapon ();
 
 	if (self.impulse == 9)
