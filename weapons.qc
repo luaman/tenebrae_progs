@@ -211,7 +211,8 @@ void(float damage, vector dir) TraceAttack =
 
 	if (trace_ent.takedamage)
 	{
-		SpawnBlood (org, vel*0.2, damage);
+		if (trace_ent.solid != SOLID_BSP)
+			SpawnBlood (org, vel*0.2, damage);
 		AddMultiDamage (trace_ent, damage);
 	}
 	else
@@ -1227,11 +1228,12 @@ void() CycleWeaponCommand =
 	}
 
 };
+
 /*
 ============
-PreviousWeaponCommand
+PreviousWeaponCommand //Eradicator
 
-Go to the previous weapon with ammo - Eradicator
+Go to the previous weapon with ammo
 ============
 */
 void() PreviousWeaponCommand =
@@ -1299,7 +1301,6 @@ void() PreviousWeaponCommand =
 		}
 	}
 };
-
 /*
 ============
 ServerflagsCommand
@@ -1415,5 +1416,3 @@ void() SuperDamageSound =
 	}
 	return;
 };
-
-
