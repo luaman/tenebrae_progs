@@ -336,6 +336,8 @@ void() BecomeExplosion =
 	self.color = '1 0.75 0.5';
 	self.light_lev = 300;
 	s_explode1 ();
+
+	SUB_BasicEmitter(self.origin_x,self.origin_y,self.origin_z,10,"pt_explodecloud");
 };
 
 void() T_MissileTouch =
@@ -372,8 +374,6 @@ void() T_MissileTouch =
 	WriteCoord (MSG_BROADCAST, self.origin_x);
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
-
-           SUB_BasicEmitter(self,10,"pt_explodecloud");
 
 	BecomeExplosion ();
 };
