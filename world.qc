@@ -394,7 +394,7 @@ void() info_origin = //Added because some compilers don't support origins - Erad
 {
 	if (!self.targetname)
 		objerror("info_origin with no targetname!\n");
-}
+};
 
 //Changed from func_rotate to func_rotating for compatability 
 void() func_rotating = //Rotating Brush - Eradicator 
