@@ -905,3 +905,51 @@ void () become_corpse =
 	self.th_pain = SUB_Null;
         self.touch = corpse_touch;
 };
+
+//Entity by Tigger-on - Eradicator
+/*QUAKED misc_gibs (0 .5 .8) (-8 -8 -8) (8 8 8)
+drops gibs from the spawn point, thats all
+*/
+
+void() gib_fly;
+void() gib_touch;
+void() misc_gibs =
+{
+        precache_model ("progs/gib2.mdl");
+        precache_model ("progs/h_zombie.mdl");
+        precache_model ("progs/gib1.mdl");
+        precache_sound ("zombie/z_miss.wav");
+        self.classname = "gibball";
+        self.nextthink = time + (random() * 5);
+        self.think = gib_fly;
+        if (!self.speed)
+                self.speed == 1000;
+};
+
+void() gib_fly =
+{
+local entity    gibball;
+
+
+        gibball = spawn();
+        gibball.solid = SOLID_TRIGGER;
+        gibball.movetype = MOVETYPE_BOUNCE;
+        gibball.classname = "gibball";
+        setorigin (gibball, self.origin);
+        gibball.nextthink = time + 8;
+        gibball.think = SUB_Remove;
+        gibball.touch = gib_touch;
+        ThrowGib ("progs/gib2.mdl", 0);
+        ThrowGib ("progs/h_zombie.mdl", 0);
+        ThrowGib ("progs/gib1.mdl", 0);
+        self.nextthink = time + (random() * 5) + 3;
+        self.think = gib_fly;
+};
+
+void() gib_touch = 
+{
+        sound (self, CHAN_VOICE, "zombie/z_miss.wav", 0.25, ATTN_NORM); 
+        if (self.velocity == '0 0 0')
+                self.avelocity = '0 0 0';
+        return;
+};
