@@ -62,7 +62,10 @@ void() misc_model =
 	}
 	//}
 	self.solid = SOLID_NOT;
-	self.movetype = MOVETYPE_FAKEPUSH;	
+	if (self.target)
+		self.movetype = MOVETYPE_FAKEPUSH;
+	else
+		self.movetype = MOVETYPE_NONE;	
 };
 
 void() static_brush =
