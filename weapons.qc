@@ -1227,6 +1227,78 @@ void() CycleWeaponCommand =
 	}
 
 };
+/*
+============
+PreviousWeaponCommand
+
+Go to the previous weapon with ammo - Eradicator
+============
+*/
+void() PreviousWeaponCommand =
+{
+	local	float	it, am;
+	
+	it = self.items;
+	self.impulse = 0;
+	
+	while (1)
+	{
+		am = 0;
+
+		if (self.weapon == IT_LIGHTNING)
+		{
+			self.weapon = IT_ROCKET_LAUNCHER;
+			if (self.ammo_rockets < 1)
+				am = 1;
+		}
+		else if (self.weapon == IT_AXE)
+		{
+			self.weapon = IT_LIGHTNING;
+			if (self.ammo_cells < 1)
+				am = 1;
+		}
+		else if (self.weapon == IT_SHOTGUN)
+		{
+			self.weapon = IT_AXE;
+		}		
+		else if (self.weapon == IT_SUPER_SHOTGUN)
+		{
+			self.weapon = IT_SHOTGUN;
+			if (self.ammo_shells < 1)
+				am = 1;
+		}
+		else if (self.weapon == IT_NAILGUN)
+		{
+			self.weapon = IT_SUPER_SHOTGUN;
+			if (self.ammo_shells < 2)
+				am = 1;
+		}
+		else if (self.weapon == IT_SUPER_NAILGUN)
+		{
+			self.weapon = IT_NAILGUN;
+			if (self.ammo_nails < 1)
+				am = 1;
+		}
+		else if (self.weapon == IT_GRENADE_LAUNCHER)
+		{
+			self.weapon = IT_SUPER_NAILGUN;
+			if (self.ammo_nails < 2)
+				am = 1;
+		}
+		else if (self.weapon == IT_ROCKET_LAUNCHER)
+		{
+			self.weapon = IT_GRENADE_LAUNCHER;
+			if (self.ammo_rockets < 1)
+				am = 1;
+		}
+	
+		if ( (self.items & self.weapon) && am == 0)
+		{
+			W_SetCurrentAmmo ();
+			return;
+		}
+	}
+};
 
 /*
 ============
@@ -1267,6 +1339,8 @@ void() ImpulseCommands =
 		CycleWeaponCommand ();
 	if (self.impulse == 11)
 		ServerflagsCommand ();
+	if (self.impulse == 12)
+		PreviousWeaponCommand ();
 
 // Matt >>
 	if (self.impulse == 100) { 
