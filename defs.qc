@@ -354,7 +354,8 @@ float	SVC_INTERMISSION	= 30;
 float	SVC_FINALE			= 31;
 float	SVC_CDTRACK			= 32;
 float	SVC_SELLSCREEN		= 33;
-
+float	SVC_BASICEMITTER		= 35;
+float	SVC_EXTENDEDEMITTER		= 36;
 
 float	TE_SPIKE		= 0;
 float	TE_SUPERSPIKE	= 1;
